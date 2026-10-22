@@ -18,7 +18,7 @@ using std::getline;
 
 int main()
 {
-
+Store store1;
 	//import from text files
 
 	//add to store and other variables
