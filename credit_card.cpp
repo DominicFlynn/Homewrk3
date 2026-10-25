@@ -38,7 +38,7 @@ std::string credit_card::credit_card_info()
 {
     std::ostringstream output;
 
-    output << "Credit Card:\n";
+    
     output << "Credit card number: " << cc_number << "\n";
     output << "Credit Card Limit: $"
            << std::fixed << std::setprecision(2)
