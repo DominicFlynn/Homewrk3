@@ -2,7 +2,7 @@
 string address::address_info()
 {
  string info ="";
- info+="Address:\n";
+ 
  info+= address_line1+ "\n";
  if (address_line2 != "")
     {
