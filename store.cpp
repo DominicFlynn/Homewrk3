@@ -1,8 +1,9 @@
+
 #include "store.h"
 #include <sstream>
-#include <iomanip>
 #include <string>
 
+// Constructor
 Store::Store()
     : num_customers_(0),
       num_products_(0),
@@ -10,7 +11,7 @@ Store::Store()
 {
 }
 
-// Customer count
+// Set and get customer count
 void Store::num_customers(int customer_count)
 {
     if (customer_count >= 0 && customer_count <= 100)
@@ -22,7 +23,7 @@ int Store::num_customers()
     return num_customers_;
 }
 
-// Product count
+// Set and get product count
 void Store::num_products(int product_count)
 {
     if (product_count >= 0 && product_count <= 100)
@@ -34,7 +35,7 @@ int Store::num_products()
     return num_products_;
 }
 
-// Transaction count
+// Set and get transaction count
 void Store::num_transactions(int transaction_count)
 {
     if (transaction_count >= 0 && transaction_count <= 100)
@@ -188,15 +189,14 @@ bool Store::make_purchase(Person customer, product item, int quantity)
     new_transaction.quantity = quantity;
 
     // Save the updated customer and record the purchase.
-    update_customer(customer_index, stored_customer);
-
-    if (!add_transaction(new_transaction))
-        return false;
+    customers_[customer_index] = stored_customer;
+    transactions_[num_transactions_] = new_transaction;
+    num_transactions_++;
 
     return true;
 }
 
-// Product information
+// Display all products
 std::string Store::product_info()
 {
     std::ostringstream output;
@@ -209,7 +209,7 @@ std::string Store::product_info()
     return output.str();
 }
 
-// Transaction information
+// Display all transactions
 std::string Store::transaction_info()
 {
     std::ostringstream output;
@@ -222,7 +222,7 @@ std::string Store::transaction_info()
     return output.str();
 }
 
-// Customer information
+// Display all customers
 std::string Store::customer_info()
 {
     std::ostringstream output;
@@ -235,7 +235,7 @@ std::string Store::customer_info()
     return output.str();
 }
 
-// Purchase history for one customer
+// Display purchase history for one customer
 std::string Store::purchase_history(Person customer)
 {
     std::ostringstream output;
@@ -256,14 +256,19 @@ std::string Store::purchase_history(Person customer)
     return output.str();
 }
 
-// Full store information
+// Display complete store information
 std::string Store::store_info()
 {
     std::ostringstream output;
 
-    output << "Number of customers: " << num_customers_ << "\n";
-    output << "Number of products: " << num_products_ << "\n";
-    output << "Number of transactions: " << num_transactions_ << "\n\n";
+    output << "Number of customers: "
+           << num_customers_ << "\n";
+
+    output << "Number of products: "
+           << num_products_ << "\n";
+
+    output << "Number of transactions: "
+           << num_transactions_ << "\n\n";
 
     output << "CUSTOMERS\n";
     output << customer_info() << "\n";
@@ -274,4 +279,6 @@ std::string Store::store_info()
     output << "TRANSACTIONS\n";
     output << transaction_info();
 
-    return output.str();//code for store class here
+    return output.str();
+}
+
