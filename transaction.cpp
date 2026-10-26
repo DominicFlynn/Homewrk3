@@ -3,13 +3,19 @@
 
 std::string transaction::transaction_info()
 {
-    std::ostringstream output;
+    std::string info = "";
 
-    output << "Transaction Number: " << transaction_number << "\n";
-    output << "Customer: " << customer.name() << "\n";
-    output << "Product: " << purchased_item.name << "\n";
-    output << "Quantity: " << quantity << "\n";
-    output << "Total: $" << purchased_item.price * quantity << "\n";
+    info += "Transaction #: "
+         + std::to_string(transaction_number) + "\n";
 
-    return output.str();
+    info += "Customer:\n";
+    info += customer.person_info();
+
+    info += "Product:\n";
+    info += purchased_item.product_info();
+
+    info += "Quantity: "
+         + std::to_string(quantity) + "\n";
+
+    return info;
 }
